@@ -300,7 +300,8 @@ class VideoProcessor:
         records = []
         for i in range(len(frames_chain)):
             record = self.create_csv_record(i, bbox_center_chain, bbox_size_chain, frames_chain, measured_bbox_center_chain, ant_id)
-            records.append(record)
+            if len(record) > 0:
+                records.append(record)
             self.draw_box_1(i,  bbox_center_chain, bbox_size_chain, frames_chain, measured_bbox_center_chain, color, node.id)
             self.draw_tail(i,  bbox_center_chain, bbox_size_chain, frames_chain, measured_bbox_center_chain, color)
         return records
@@ -312,7 +313,7 @@ class VideoProcessor:
         bbox_size = bbox_size_chain[index]
         if bbox[0] == -1 or bbox[1] == -1:
             bbox = predicted_bbox
-        if bbox[0] == -1 or bbox[1] == -1:
+        if bbox[0] == -1 or bbox[1] == -1 or math.isnan(bbox[0]) or math.isnan(bbox[1]):
             return []
         return [frame_index + 1, ant_id, bbox[0], bbox[1], bbox_size[0], bbox_size[1], 1, 1, 1]
 
@@ -327,7 +328,7 @@ class VideoProcessor:
             dotted = True
             bbox = predicted_bbox
 
-        if bbox[0] == -1 or bbox[1] == -1:
+        if bbox[0] == -1 or bbox[1] == -1 or math.isnan(bbox[0]) or math.isnan(bbox[1]):
             return
 
         if dotted:
@@ -358,7 +359,7 @@ class VideoProcessor:
             predicted_bbox = measured_bbox_center_chain[t]
             if bbox[0] == -1 or bbox[1] == -1:
                 bbox = predicted_bbox
-            if bbox[0] == -1 or bbox[1] == -1:
+            if bbox[0] == -1 or bbox[1] == -1 or math.isnan(bbox[0]) or math.isnan(bbox[1]):
                 continue
             box_size = bbox_size_chain[t]
             tail_positions.append([int(bbox[0] + box_size[0]/2), int(bbox[1] + box_size[1]/2)])
