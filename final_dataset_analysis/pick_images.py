@@ -8,7 +8,7 @@ SKIP = 10
 tagged = 'tagged'
 video_dir = "/home/cabe0006/mb20_scratch/chamath/data/ant_dataset/{}".format(tagged)
 output_dir = "/home/cabe0006/mb20_scratch/chamath/data/ant_dataset_images/{}".format(tagged)
-
+os.makedirs(output_dir, exist_ok=True)
 
 def convert_frames(vid_path):
     capture = cv2.VideoCapture(vid_path)
