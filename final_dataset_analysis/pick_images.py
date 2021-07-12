@@ -6,8 +6,8 @@ from multiprocessing import Pool
 SKIP = 10
 
 tagged = 'tagged'
-video_dir = "/home/cabe0006/mb20_scratch/chamath/data/ant_dataset/tagged"
-output_dir = "/home/cabe0006/mb20_scratch/chamath/object-detection-v3/dataset/train"
+video_dir = "/home/cabe0006/mb20_scratch/chamath/data/ant_dataset/{}".format(tagged)
+output_dir = "/home/cabe0006/mb20_scratch/chamath/data/ant_dataset_images/{}".format(tagged)
 
 
 def convert_frames(vid_path):
@@ -39,7 +39,8 @@ video_files = os.listdir(video_dir)
 video_files = list(filter(lambda x: '_0' in x, video_files))
 video_files = [f.split('.')[0] for f in video_files]
 
-
-with Pool(6) as p:
-    p.map(process_video, video_files)
+for f in video_files:
+    process_video(f)
+# with Pool(6) as p:
+#     p.map(process_video, video_files)
 
