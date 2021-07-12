@@ -29,8 +29,10 @@ os.makedirs(out_dir, exist_ok=True)
 
 annotation_path = os.path.join(base_path, 'records_corrected_False.csv')
 df = pd.read_csv(annotation_path)
+tagged_file_names = [x+".jpg" for x in list(df.frame_id.unique())]
 
 files = os.listdir(in_dir)
+files = list(filter(lambda x: x in tagged_file_names, files))
 count = 30
 selected_files = [files[random.randint(0, len(files) - 1)] for _ in range(count)]
 
