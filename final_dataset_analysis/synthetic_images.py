@@ -157,7 +157,7 @@ def process_combination(i):
     ant_imgs = [cv2.imread(f, cv2.IMREAD_UNCHANGED) for f in cropped_img_paths]
     #     results = []
     for j in range(IMG_COUNT):
-        file_name = f"A{ANT_COUNT}{background_name.split('.')[0]}_{i * IMG_COUNT + j:06d}"
+        file_name = f"A{ANT_COUNT}{ant_src}{background_name.split('.')[0]}_{i * IMG_COUNT + j:06d}"
         img_path = os.path.join(img_dir, f'{file_name}.jpeg')
         csv_path = os.path.join(img_dir, f'{file_name}.csv')
 
